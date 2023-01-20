@@ -1,3 +1,4 @@
+/***********   changing the colors codes  *****************/
 .container {
   text-align: center;
   margin: 0px auto;
@@ -18,4 +19,16 @@
 
 button {
   margin: 2px;
+}
+
+/***********   changing the shape codes  *****************/
+
+.shape {
+  width: 50px;
+  height: 50px;
+  border: 10px solid red;
+  margin: 0px auto;
+  margin-top: 40%;
+  margin-bottom: 20%;
+  /* border-radius: 20px 10px 10px 10px; */
 }

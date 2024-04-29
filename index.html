@@ -1,64 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./css/bootstrap.css">
-    <title>Movie</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./css/bootstrap.css">
+  <title>Movie</title>
 </head>
 <body>
-
+  
   <div class="container mt-3">
     <div class="d-flex flex-column align-items-center justify-content-center">
       <h1 class="mb-5">Movie catalog</h1>
-
+      
       <div class="row w-100">
-        <div class="col-4">
+        <div class="col-4 pe-4">
           <div class="filter-side mb-4">
             <input class="form-control mb-2" type="text" placeholder="Enter movie name">
-  
+            
             <input class="form-control mb-2" type="text" placeholder="Enter movie rating"> 
-    
+            
             <select class="form-select mb-2" aria-label="Default select example">
               <option selected value="All">All</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
-    
+            
             <select class="form-select mb-2" aria-label="Default select example">
               <option selected>Rating (high to low)</option>
               <option value="1">One</option>
               <option value="2">Two</option>
               <option value="3">Three</option>
             </select>
-    
+            
             <button class="btn btn-primary w-100">Search</button>
           </div>
-  
+          
           <div class="bookmarked-side">
-              <h2>Bookmarked movies</h2>
-
-              <ul class="list-group">
-                <li class="list-group-item px-3">
-                  <h3 class="h5 fw-bold text-dark ">Avengers</h3>
-                  <button class="fs-6 btn btn-danger">Remove</button>
-                </li>
-              </ul>
+            <h2>Bookmarked movies</h2>
+            
+            <ul class="list-group">
+              <li class="list-group-item px-3">
+                <h3 class="h5 fw-bold text-dark ">Avengers</h3>
+                <button class="fs-6 btn btn-danger">Remove</button>
+              </li>
+            </ul>
           </div>
         </div>
         <div class="col-8">
           <h2 class="h4 fw-bold">Search results: <span>0</span></h2>
-
+          
           <div class="alert alert-primary" role="alert">
-            Use the form on the left to search for a movie
+            Use the form on the left to search for a movie 
           </div>
-
-          <ul class="movie__list">
-            <li class="movie__item">
+          
+          <ul class="movie__list list-unstyled row" id="movie__list">
+            <!-- <li class="movie__item col-6 py-2">
+              <img class="w-100" src="https://img.youtube.com/vi/4hZi5QaMBFc/mqdefault.jpg">
               
-            </li>
-          </ul>
+              <div class="p-3 px-4 border">
+                <h3>Avengers</h3>
+                
+                <p>2018</p>
+                
+                <p>star</p>
 
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-outline-primary" style="font-size: 13px;">Watch trailer</button>
+                  <button class="btn btn-outline-info mx-1" style="font-size: 13px;">More info</button>
+                  <button class="btn btn-outline-success" style="font-size: 13px;">Bookmark</button>
+                </div>
+              </div>
+            </li>      -->
+            
+            
+            
+            
+            
+            
+            
+            
+            
+          </ul>
+          
           <nav class="d-flex justify-content-center" aria-label="...">
             <ul class="pagination pagination-sm">
               <li class="page-item active" aria-current="page">
@@ -73,12 +96,12 @@
       </div>
     </div>
   </div>
-    
   
-
-
-    <script src="./movie.js"></script>
-    <script src="./script.js"></script>
-    <script src="./js/bootstrap.js"></script>
+  
+  
+  
+  <script src="./movie.js"></script>
+  <script src="./script.js"></script>
+  <script src="./js/bootstrap.js"></script>
 </body>
 </html>

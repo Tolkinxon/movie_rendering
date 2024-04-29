@@ -14,7 +14,7 @@
 
       <div class="row w-100">
         <div class="col-4">
-          <div class="filter-side">
+          <div class="filter-side mb-4">
             <input class="form-control mb-2" type="text" placeholder="Enter movie name">
   
             <input class="form-control mb-2" type="text" placeholder="Enter movie rating"> 
@@ -37,9 +37,39 @@
   
           <div class="bookmarked-side">
               <h2>Bookmarked movies</h2>
+
+              <ul class="list-group">
+                <li class="list-group-item px-3">
+                  <h3 class="h5 fw-bold text-dark ">Avengers</h3>
+                  <button class="fs-6 btn btn-danger">Remove</button>
+                </li>
+              </ul>
           </div>
         </div>
-        <div class="col-8"></div>
+        <div class="col-8">
+          <h2 class="h4 fw-bold">Search results: <span>0</span></h2>
+
+          <div class="alert alert-primary" role="alert">
+            Use the form on the left to search for a movie
+          </div>
+
+          <ul class="movie__list">
+            <li class="movie__item">
+              
+            </li>
+          </ul>
+
+          <nav class="d-flex justify-content-center" aria-label="...">
+            <ul class="pagination pagination-sm">
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="#">1</a>
+              </li>
+              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              <li class="page-item"><a class="page-link" href="#">3</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li>
+            </ul>
+          </nav>
+        </div>
       </div>
     </div>
   </div>

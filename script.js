@@ -13,8 +13,7 @@ function render(arr, renderingPlace) {
         const movieYear = document.createElement('p')
         const languageTitle = document.createElement('p')
         
-        newImg.src = `https://img.youtube.com/vi/${ytid}/maxresdefault.jpg`
-        newImg.width = 500
+        newImg.src = `https://img.youtube.com/vi/${ytid}/mqdefault.jpg`
         newH1.textContent = Title
         movieYear.textContent = movie_year
         languageTitle.textContent = language

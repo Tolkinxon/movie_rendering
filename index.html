@@ -47,61 +47,57 @@
           </div>
         </div>
         <div class="col-8">
-          <h2 class="h4 fw-bold">Search results: <span>0</span></h2>
+          <h2 class="h4 fw-bold">Search results: <span id="counter">0</span></h2>
           
           <div class="alert alert-primary" role="alert">
             Use the form on the left to search for a movie 
           </div>
           
           <ul class="movie__list list-unstyled row" id="movie__list">
-            <!-- <li class="movie__item col-6 py-2">
-              <img class="w-100" src="https://img.youtube.com/vi/4hZi5QaMBFc/mqdefault.jpg">
-              
-              <div class="p-3 px-4 border">
-                <h3>Avengers</h3>
-                
-                <p>2018</p>
-                
-                <p>star</p>
-
-                <div class="d-flex justify-content-between">
-                  <button class="btn btn-outline-primary" style="font-size: 13px;">Watch trailer</button>
-                  <button class="btn btn-outline-info mx-1" style="font-size: 13px;">More info</button>
-                  <button class="btn btn-outline-success" style="font-size: 13px;">Bookmark</button>
-                </div>
-              </div>
-            </li>      -->
-            
-            
-            
-            
-            
-            
-            
-            
-            
+           
           </ul>
           
           <nav class="d-flex justify-content-center" aria-label="...">
             <ul class="pagination pagination-sm">
-              <li class="page-item active" aria-current="page">
+              <!-- <li class="page-item active" aria-current="page">
                 <a class="page-link" href="#">1</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
+              </li> -->
+              <!-- <li class="page-item"><a class="page-link" href="#">2</a></li>
               <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item"><a class="page-link" href="#">4</a></li>
+              <li class="page-item"><a class="page-link" href="#">4</a></li> -->
+
             </ul>
           </nav>
         </div>
       </div>
     </div>
-  </div>
+  </div> 
+
   
-  
-  
+  <template id="template">
+    <li class="movie__item col-6 py-2">
+      <img class="w-100" src="https://img.youtube.com/vi/4hZi5QaMBFc/mqdefault.jpg">
+      
+      <div class="p-3 px-4 border">
+        <h3>Avengers</h3>
+        
+        <p>2018</p>
+        
+        <p>star</p>
+
+        <div class="d-flex justify-content-between">
+          <button class="btn btn-outline-primary" style="font-size: 13px;">Watch trailer</button>
+          <button class="btn btn-outline-info mx-1" style="font-size: 13px;">More info</button>
+          <button class="btn btn-outline-success" style="font-size: 13px;">Bookmark</button>
+        </div>
+      </div>
+    </li>     
+  </template>
   
   <script src="./movie.js"></script>
   <script src="./script.js"></script>
   <script src="./js/bootstrap.js"></script>
+
+
 </body>
 </html>

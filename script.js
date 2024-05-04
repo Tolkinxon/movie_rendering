@@ -5,7 +5,7 @@ const elCounter = document.querySelector('#counter')
 const elTemplate = document.querySelector('#template').content
 
 
-let movieArr = movies.slice(0, 10) // taking of part movie list
+let movieArr = movies.slice(0, 3) // taking of part movie list
 
 elCounter.textContent = movieArr.length // counting length of movies
 
@@ -80,11 +80,12 @@ elFilterButton.addEventListener('click', (evt) => {
       let oneItemCategory = item.categories.split('|')
     
       oneItemCategory.forEach(item => {
-        console.log(categoryList.includes(item));
-
+        if(!(categoryList.includes(item))){
+            categoryList.push(item)
+        }
       })
     })
-
+    
    
 // -------------------------------------------------------------------------------------------
 

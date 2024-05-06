@@ -63,22 +63,7 @@ render(normalizedMovieList, elList) // rendering movie list
 
 
 
-// filter by rating -----------------------------------------------------------------------
-// elFilterButton.addEventListener('click', (evt) => {
-
-//     const ratingValue = +elRating.value.trim()
-
-//    const filteredMovie = normalizedMovieList.filter(item => item.rating >= ratingValue) 
-
-//     render(filteredMovie, elList) // rendering
-//     elCounter.textContent = filteredMovie.length // counting
-// })
-//--------------------------------------------------------------------------------------------
-
-
-
-
-// taking category list from movie list ------------------------------------------------------
+// taking category list from movie list ------------------------------------------------------...
     const categoryList = []
 
    normalizedMovieList.forEach(item => {
@@ -90,6 +75,8 @@ render(normalizedMovieList, elList) // rendering movie list
         }
       })
     })
+
+    categoryList.sort()
 // -------------------------------------------------------------------------------------------
 
 
@@ -111,43 +98,41 @@ function renderCategoriesList(categoriesList, renderingPlace) {
 
     renderingPlace.appendChild(fragment)
 }
-
 renderCategoriesList(categoryList, elCategoriesSelect) // rendering category list to select tag
 //-------------------------------------------------------------------------------------------------
 
 
 
 
-// filtering movie list by selectd category -------------------------------------------------
-// elFilterButton.addEventListener('click', (evt) => {
-
-//     let filteredListByCategory = []
-
-//     if(elCategoriesSelect.value == 'All') {
-//         filteredListByCategory = normalizedMovieList
-//     }
-//     else {
-//         filteredListByCategory = normalizedMovieList.filter(item => {
-//           return item.categories.split('|').includes(elCategoriesSelect.value)
-//         })
-//     }
-
-//     render(filteredListByCategory, elList) // rendering movie list by selectd category
-// })
-//-----------------------------------------------------------------------------------------------
 
 
-elMovieName.addEventListener('change', (evt) => {
+elFilterButton.addEventListener('click', (evt) => {
 
+    const inputName = elMovieName.value.trim()
+    const rating = elRating.value
+    const category = elCategoriesSelect.value
+    
+
+    const pattern = new RegExp(inputName, 'gi')
+
+
+     const filteredMovies = filterWithAllfeatures(pattern, rating, category)
 
     
 
-    const pattern = new RegExp(elMovieName.value.trim(), 'gi')
+     render(filteredMovies, elList) 
+     elCounter.textContent = filteredMovies.length 
 
+  
 
-    const filteredNorm = normalizedMovieList.filter(item => {
-        return item.movie__title.match(pattern)
-    })
     
-    render(filteredNorm, elList) 
+   
 })
+
+function filterWithAllfeatures(inputName, rating, category){
+    return normalizedMovieList.filter(item => {
+        const filteredcategory = category === 'All' || item.movie__categories.split('|').includes(category)
+
+        return filteredcategory && item.movie__rating >= rating && item.movie__title.match(inputName)
+    })
+}

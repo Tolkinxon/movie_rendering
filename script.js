@@ -1,6 +1,7 @@
 const elMovieName = document.querySelector('#movie__name')
 const elRating = document.querySelector('#movie__rating-input')
 const elCategoriesSelect = document.querySelector('#categories-select')
+const elSortingType = document.querySelector('.select-sort')
 const elFilterButton = document.querySelector('.movie__filter-button')
 const elCounter = document.querySelector('#counter')
 const elList = document.querySelector('#movie__list')
@@ -118,7 +119,20 @@ elFilterButton.addEventListener('click', (evt) => {
 
      const filteredMovies = filterWithAllfeatures(pattern, rating, category)
 
-    
+    console.log(elSortingType.value);
+
+    if(elSortingType.value == 'high'){
+        filteredMovies.sort((a, b) => {
+           return b.movie__rating - a.movie__rating
+        })
+    }
+    if(elSortingType.value == 'low'){
+        filteredMovies.sort((a, b) => {
+           return a.movie__rating - b.movie__rating
+        })
+    }
+
+
 
      render(filteredMovies, elList) 
      elCounter.textContent = filteredMovies.length 

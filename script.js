@@ -65,19 +65,32 @@ render(normalizedMovieList, elList) // rendering movie list
 
 
 // taking category list from movie list ------------------------------------------------------...
-    const categoryList = []
 
-   normalizedMovieList.forEach(item => {
-      let oneItemCategory = item.movie__categories.split('|')
-    
-      oneItemCategory.forEach(item => {
-        if(!(categoryList.includes(item))){
-            categoryList.push(item)
-        }
-      })
-    })
+function categoriesList (normal) {
+    const categoryListarr = []
 
-    categoryList.sort()
+    normal.forEach(item => {
+       let oneItemCategory = item.movie__categories.split('|')
+     
+       oneItemCategory.forEach(item => {
+         if(!(categoryListarr.includes(item))){
+            categoryListarr.push(item)
+         }
+       })
+     })
+
+     let sortedList = categoryListarr.sort()
+
+    //  sortedList.unshift('All')
+
+
+ 
+
+    renderCategoriesList(sortedList, elCategoriesSelect)
+}   
+
+categoriesList(normalizedMovieList) 
+
 // -------------------------------------------------------------------------------------------
 
 
@@ -85,6 +98,9 @@ render(normalizedMovieList, elList) // rendering movie list
 
 // rendering category list to select for choosing category -----------------------------------
 function renderCategoriesList(categoriesList, renderingPlace) {
+
+ 
+    renderingPlace.innerHTML = null
     
     const fragment = document.createDocumentFragment()
 
@@ -96,10 +112,10 @@ function renderCategoriesList(categoriesList, renderingPlace) {
 
         fragment.appendChild(newOption)
     })
-
     renderingPlace.appendChild(fragment)
 }
-renderCategoriesList(categoryList, elCategoriesSelect) // rendering category list to select tag
+
+ // rendering category list to select tag
 //-------------------------------------------------------------------------------------------------
 
 
@@ -119,7 +135,6 @@ elFilterButton.addEventListener('click', (evt) => {
 
      const filteredMovies = filterWithAllfeatures(pattern, rating, category)
 
-    console.log(elSortingType.value);
 
     if(elSortingType.value == 'high'){
         filteredMovies.sort((a, b) => {
@@ -135,12 +150,8 @@ elFilterButton.addEventListener('click', (evt) => {
 
 
      render(filteredMovies, elList) 
+     categoriesList(filteredMovies) 
      elCounter.textContent = filteredMovies.length 
-
-  
-
-    
-   
 })
 
 function filterWithAllfeatures(inputName, rating, category){

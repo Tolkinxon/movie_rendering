@@ -163,10 +163,14 @@ const elTemplate = document.querySelector('#template').content
 // }
 
 
+const somethign = 0
+
+
+
 
 
 // taking normalized movie list from data base
-const movieArr = movies.slice(0, 10).map(item => {
+const movieArr = movies.slice(0, 15).map(item => {
     const {Title, Categories, imdb_rating, ytid} = item
 
     return {
@@ -178,5 +182,76 @@ const movieArr = movies.slice(0, 10).map(item => {
 })
 
 
+// rendering codes for all movies to HTML
+function render(arrForRendering, placeForRendering){
+
+    placeForRendering.innerHTML = null
+
+    const fragment = document.createDocumentFragment()
+
+    arrForRendering.forEach(item => {
+        const template = elTemplate.cloneNode(true)
+        const { movie__categories, movie__img, movie__rating, movie__title} = item
+
+        template.querySelector('.movie__img').src = `https://img.youtube.com/vi/${movie__img}/mqdefault.jpg`
+        template.querySelector('.movie__title').textContent = movie__title
+        template.querySelector('.movie__category').textContent = movie__categories
+        template.querySelector('.movie__rating').textContent = movie__rating
+        
+        fragment.appendChild(template)
+    })
+    elCounter.textContent = arrForRendering.length
+    placeForRendering.appendChild(fragment)
+}
+render(movieArr, elList)
 
 
+
+
+
+// rendering codes for all filtered categories to HTML
+function renderingFilteredCategories(movieList, renderingPlace){
+     
+    filteredCategoryList = []
+    const fragment = document.createDocumentFragment()
+
+    movieList.forEach(item => {
+        const { movie__categories } = item
+
+        const splittedCategories = movie__categories.split('|')
+
+        splittedCategories.forEach(item => {
+            if(!filteredCategoryList.includes(item)){
+                filteredCategoryList.push(item)
+            }
+        })       
+    })
+
+    filteredCategoryList.sort()
+
+    filteredCategoryList.forEach(item => {
+        const option = document.createElement('option')
+
+        option.textContent = item
+        option.value = item
+    
+        fragment.appendChild(option)
+    }) 
+
+    renderingPlace.appendChild(fragment)
+}
+renderingFilteredCategories(movieArr, elCategoriesSelect)
+
+
+
+elFilterButton.addEventListener('click', (evt) =>  {
+    const movieName = elMovieName.value.trim()
+    const movieRating = elRating.value
+    const movieCategory = elCategoriesSelect.value
+
+    filteringByNameRatingAndCategories(movieName, movieRating, movieCategory)
+})
+
+function filteringByNameRatingAndCategories(movieName, movieRating, movieCategory) {
+    console.log(movieName, movieRating, movieCategory)
+}

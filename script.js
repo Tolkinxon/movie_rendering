@@ -5,20 +5,28 @@ const elSortingType = document.querySelector('.select-sort')
 const elFilterButton = document.querySelector('.movie__filter-button')
 const elCounter = document.querySelector('#counter')
 const elList = document.querySelector('#movie__list')
+const elBookmarkList = document.querySelector('.bookmark__list')
 const elTemplate = document.querySelector('#template').content
+const elBookmarkTemplate = document.querySelector('#bookmark__template').content
+
 
 
 // taking normalized movie list from data base
-const movieArr = movies.slice(0, 50).map(item => {
+const movieArr = movies.slice(0, 10).map((item, index) => {
     const {Title, Categories, imdb_rating, ytid} = item
 
     return {
+        movie__id: ++index,
         movie__title: Title.toString(),
         movie__categories: Categories,
         movie__rating: imdb_rating,
         movie__img: ytid
     }
 })
+
+
+
+
 
 
 // rendering codes for all movies to HTML
@@ -30,12 +38,13 @@ function render(arrForRendering, placeForRendering){
 
     arrForRendering.forEach(item => {
         const template = elTemplate.cloneNode(true)
-        const { movie__categories, movie__img, movie__rating, movie__title} = item
+        const { movie__categories, movie__img, movie__rating, movie__title, movie__id} = item
 
         template.querySelector('.movie__img').src = `https://img.youtube.com/vi/${movie__img}/mqdefault.jpg`
         template.querySelector('.movie__title').textContent = movie__title
         template.querySelector('.movie__category').textContent = movie__categories.split('|').join(', ')
         template.querySelector('.movie__rating').textContent = movie__rating
+        template.querySelector('.bookmark-btn').dataset.movieId = movie__id
         
         fragment.appendChild(template)
     })
@@ -138,3 +147,34 @@ function filteringByNameRatingAndCategories(movieName, movieRating, movieCategor
         return filteredCategory && movie__rating >= movieRating && movie__title.match(movieName)
     })
 }
+
+
+
+
+// bookmark side
+const bookmarkArr = []
+
+function renderinForBookmark(bookmarkArr, renderingPlaceForBookmark){
+
+    renderingPlaceForBookmark.innerHTML = null
+    const fragment = document.createDocumentFragment()
+
+    bookmarkArr.forEach(item => {
+        const { movie__title, movie__id} = item
+
+        const bookmarkTemplate = elBookmarkTemplate.cloneNode(true)
+
+        bookmarkTemplate.querySelector('.bookmark__title').textContent = movie__title       
+        bookmarkTemplate.querySelector('.bookmark__btn').dataset.bookmarkId = movie__id    
+        
+
+        fragment.appendChild(bookmarkTemplate)
+    })
+    renderingPlaceForBookmark.appendChild(fragment)
+}
+renderinForBookmark(bookmarkArr, elBookmarkList)
+
+
+elList.addEventListener('click', (evt) => {
+    console.log('bookmark');
+})

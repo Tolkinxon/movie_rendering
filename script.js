@@ -152,7 +152,13 @@ function filteringByNameRatingAndCategories(movieName, movieRating, movieCategor
 
 
 // bookmark side
-const bookmarkArr = []
+const storage = window.localStorage
+const gettingItemLocalStorage = JSON.parse(storage.getItem('items'))
+
+bookmarkArr = gettingItemLocalStorage || []
+
+
+
 
 function renderinForBookmark(bookmarkArr, renderingPlaceForBookmark){
 
@@ -176,5 +182,35 @@ renderinForBookmark(bookmarkArr, elBookmarkList)
 
 
 elList.addEventListener('click', (evt) => {
-    console.log('bookmark');
+    const bookmarkId = evt.target.dataset.movieId
+
+    if(bookmarkId){
+        const bookmarkItem = movieArr.find(item => {
+            return item.movie__id == bookmarkId
+        })
+
+        const doesInclude = bookmarkArr.findIndex(item => {
+            return item.movie__id == bookmarkId
+        })
+
+
+        if(doesInclude == -1){
+            bookmarkArr.push(bookmarkItem)
+            storage.setItem('items', JSON.stringify(bookmarkArr))
+        }
+    }
+
+    renderinForBookmark(bookmarkArr, elBookmarkList)
+})
+
+
+
+elBookmarkList.addEventListener('click', (evt) => {
+    const bookmarkId = evt.target.dataset.bookmarkId
+    
+    const removingIndex = bookmarkArr.findIndex(item => item.movie__id == bookmarkId) 
+
+    bookmarkArr.splice(removingIndex, 1)
+    renderinForBookmark(bookmarkArr, elBookmarkList)
+    storage.setItem('items', JSON.stringify(bookmarkArr))
 })

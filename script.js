@@ -89,6 +89,16 @@ renderingFilteredCategories(movieArr, elCategoriesSelect)
 
 
 elFilterButton.addEventListener('click', (evt) =>  {
+    eventFunction()
+})
+
+document.addEventListener('keydown', (evt) =>  {
+    if(evt.code == 'Enter'){
+        eventFunction()
+    }
+})
+
+function eventFunction(){
     const movieName = elMovieName.value.trim()
     const movieRating = elRating.value
     const movieCategory = elCategoriesSelect.value
@@ -113,8 +123,7 @@ elFilterButton.addEventListener('click', (evt) =>  {
     renderingFilteredCategories(filtredMovies, elCategoriesSelect)
     elCounter.textContent = filtredMovies.length
     render(filtredMovies, elList)
-   
-})
+}
 
 
 function filteringByNameRatingAndCategories(movieName, movieRating, movieCategory) {

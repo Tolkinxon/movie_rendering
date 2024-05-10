@@ -12,7 +12,7 @@ const elBookmarkTemplate = document.querySelector('#bookmark__template').content
 
 
 // taking normalized movie list from data base
-let movieArr = movies.slice(0, 10).map((item, index) => {
+const movieArr = movies.slice(0, 10).map((item, index) => {
     const {Title, Categories, imdb_rating, ytid, summary, imdb_id} = item
 
     return {
@@ -24,6 +24,17 @@ let movieArr = movies.slice(0, 10).map((item, index) => {
         movie__summary: summary,
         movie__isBookmarked: false
     }
+})
+
+const storege = window.localStorage
+const items = JSON.parse(storege.getItem('items'))
+
+items.forEach(itemBookmark => {
+    const movieItemIndex = movieArr.findIndex(itemMovie => {
+        return itemBookmark.movie__id == itemMovie.movie__id
+    })
+
+    movieArr[movieItemIndex].movie__isBookmarked = true
 })
 
 
@@ -48,7 +59,7 @@ function render(arrForRendering, placeForRendering){
         template.querySelector('.trailer-link').href = `https://www.youtube.com/watch?v=${movie__img}`
         template.querySelector('.more-info-btn').dataset.moreInfoId  = movie__id
         template.querySelector('.bookmark-btn').dataset.movieId = movie__id
-        template.querySelector('.bookmark-btn').style.color = movie__isBookmarked ? 'red' : ''
+        template.querySelector('.bookmark-btn').style.color = movie__isBookmarked ? 'rgb(115, 44, 158)' : ''
         
         fragment.appendChild(template)
     })

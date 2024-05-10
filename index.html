@@ -72,7 +72,7 @@
   </div> 
 
   
-  <template id="template">
+  <template id="movie__item-template">
     <li class="movie__item col-6 py-2">
       <img class="movie__img w-100" src="https://img.youtube.com/vi/4hZi5QaMBFc/mqdefault.jpg" style="height: 200px;">
       
@@ -84,9 +84,9 @@
         <p class="fw-bold">Rating: <span class="movie__rating fw-light"></span></p>
 
         <div class="d-flex justify-content-between">
-          <button class="btn btn-outline-primary" style="font-size: 13px;">Watch trailer</button>
-          <button class="btn btn-outline-info mx-1" style="font-size: 13px;">More info</button>
-          <button class="bookmark-btn btn btn-outline-success" style="font-size: 13px;">Bookmark</button>
+          <a class="btn btn-outline-primary trailer-link" href="#" target="_blank" style="font-size: 13px;" >Watch trailer</a>
+          <button class="more-info-btn btn btn-outline-info mx-1" style="font-size: 13px;" type="button"  data-bs-toggle="modal" data-bs-target="#exampleModal">More info</button>
+          <button class="bookmark-btn btn btn-outline-success" style="font-size: 13px;" >Bookmark</button>
         </div>
       </div>
     </li>     
@@ -98,6 +98,27 @@
       <button class="bookmark__btn fs-6 btn btn-danger">Remove</button>
     </li>
   </template>
+
+
+
+    <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body" id="modal-summary">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-outline-dark" type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
   
   <script src="./movie.js"></script>
   <script src="./script.js"></script>

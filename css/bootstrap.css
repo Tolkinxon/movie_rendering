@@ -10835,3 +10835,13 @@ textarea.form-control-lg {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
+
+.bookmarked {
+  color: rgb(115, 44, 158);
+  border: 1px solid rgb(115, 44, 158); 
+}
+
+.bookmarked:hover {
+  background-color: rgb(115, 44, 158);
+  border: 1px solid rgb(115, 44, 158); 
+}

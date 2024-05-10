@@ -3,7 +3,6 @@ const elRating = document.querySelector('#movie__rating-input')
 const elCategoriesSelect = document.querySelector('#categories-select')
 const elSortingType = document.querySelector('.select-sort')
 const elFilterButton = document.querySelector('.movie__filter-button')
-const elCounter = document.querySelector('#counter')
 const elList = document.querySelector('#movie__list')
 const elBookmarkList = document.querySelector('.bookmark__list')
 const elTemplate = document.querySelector('#movie__item-template').content
@@ -26,6 +25,9 @@ const movieArr = movies.slice(0, 10).map((item, index) => {
     }
 })
 
+
+function settingIsBookmarkedProperties (){
+
 const storege = window.localStorage
 const items = JSON.parse(storege.getItem('items'))
 
@@ -36,6 +38,8 @@ items.forEach(itemBookmark => {
 
     movieArr[movieItemIndex].movie__isBookmarked = true
 })
+}
+settingIsBookmarkedProperties()
 
 
 
@@ -59,11 +63,16 @@ function render(arrForRendering, placeForRendering){
         template.querySelector('.trailer-link').href = `https://www.youtube.com/watch?v=${movie__img}`
         template.querySelector('.more-info-btn').dataset.moreInfoId  = movie__id
         template.querySelector('.bookmark-btn').dataset.movieId = movie__id
-        template.querySelector('.bookmark-btn').style.color = movie__isBookmarked ? 'rgb(115, 44, 158)' : ''
+        
+        const classForBookmark = movie__isBookmarked ? 'bookmarked' : 'm'
+        template.querySelector('.bookmark-btn').classList.add(classForBookmark)
         
         fragment.appendChild(template)
     })
-    elCounter.textContent = arrForRendering.length
+    
+    elList.previousElementSibling.textContent = `There is only ${arrForRendering.length} movies to watch`
+    elList.previousElementSibling.classList.add()
+
     placeForRendering.appendChild(fragment)
 }
 render(movieArr, elList)
@@ -211,13 +220,9 @@ elList.addEventListener('click', (evt) => {
         movieArr[bookmarkItemIndex].movie__isBookmarked = true
         render(movieArr, elList)
         
-
-
-
         const doesInclude = bookmarkArr.findIndex(item => {
             return item.movie__id == bookmarkId
         })
-
 
         if(doesInclude == -1){
             bookmarkArr.push(bookmarkItem)
@@ -235,8 +240,6 @@ elList.addEventListener('click', (evt) => {
         document.querySelector('#exampleModalLabel').textContent = bookmarkItem.movie__title
         document.querySelector('#modal-summary').textContent = bookmarkItem.movie__summary
     }
-
-
 })
 
 
@@ -251,8 +254,6 @@ elBookmarkList.addEventListener('click', (evt) => {
     const movieItemIndex = movieArr.findIndex(item => item.movie__id == movieIdForDisableBookmark)
     movieArr[movieItemIndex].movie__isBookmarked = false
     render(movieArr, elList)
-
-
 
 
     bookmarkArr.splice(removingIndex, 1)

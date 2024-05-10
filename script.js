@@ -63,15 +63,16 @@ function render(arrForRendering, placeForRendering){
         template.querySelector('.trailer-link').href = `https://www.youtube.com/watch?v=${movie__img}`
         template.querySelector('.more-info-btn').dataset.moreInfoId  = movie__id
         template.querySelector('.bookmark-btn').dataset.movieId = movie__id
-        
+
         const classForBookmark = movie__isBookmarked ? 'bookmarked' : 'm'
         template.querySelector('.bookmark-btn').classList.add(classForBookmark)
         
         fragment.appendChild(template)
     })
+
     
     elList.previousElementSibling.textContent = `There is only ${arrForRendering.length} movies to watch`
-    elList.previousElementSibling.classList.add()
+    elList.previousElementSibling.classList[`${arrForRendering.length ? 'remove': 'add'}`]('alert-danger') 
 
     placeForRendering.appendChild(fragment)
 }
@@ -136,7 +137,9 @@ function eventFunction(){
     const movieRating = elRating.value
     const movieCategory = elCategoriesSelect.value
 
+    
     const pattern = new RegExp(movieName, 'gi')
+    console.log(pattern, movieRating, movieCategory);
 
     const filtredMovies = filteringByNameRatingAndCategories(pattern, movieRating, movieCategory)
 
@@ -154,7 +157,6 @@ function eventFunction(){
 
 
     renderingFilteredCategories(filtredMovies, elCategoriesSelect)
-    elCounter.textContent = filtredMovies.length
     render(filtredMovies, elList)
 }
 
@@ -183,25 +185,35 @@ bookmarkArr = gettingItemLocalStorage || []
 
 
 
-
 function renderinForBookmark(bookmarkArr, renderingPlaceForBookmark){
 
     renderingPlaceForBookmark.innerHTML = null
     const fragment = document.createDocumentFragment()
 
-    bookmarkArr.forEach(item => {
-        const { movie__title, movie__id} = item
 
-        const bookmarkTemplate = elBookmarkTemplate.cloneNode(true)
-
-        bookmarkTemplate.querySelector('.bookmark__title').textContent = movie__title       
-        bookmarkTemplate.querySelector('.bookmark__btn').dataset.bookmarkId = movie__id    
+  
+    if(bookmarkArr.length){
+            bookmarkArr.forEach(item => {
+                const { movie__title, movie__id} = item
         
-
-        fragment.appendChild(bookmarkTemplate)
-    })
-    renderingPlaceForBookmark.appendChild(fragment)
+                const bookmarkTemplate = elBookmarkTemplate.cloneNode(true)
+        
+                bookmarkTemplate.querySelector('.bookmark__title').textContent = movie__title       
+                bookmarkTemplate.querySelector('.bookmark__btn').dataset.bookmarkId = movie__id    
+                
+        
+                fragment.appendChild(bookmarkTemplate)
+            })
+            renderingPlaceForBookmark.appendChild(fragment)
+    }
+    else {
+        const whenBookmarkAmountZero = document.createElement('p')
+        whenBookmarkAmountZero.style.color = 'red'
+        whenBookmarkAmountZero.textContent = 'Bookmarked place empty!'
+        renderingPlaceForBookmark.appendChild(whenBookmarkAmountZero)
+    }
 }
+
 renderinForBookmark(bookmarkArr, elBookmarkList)
 
 
